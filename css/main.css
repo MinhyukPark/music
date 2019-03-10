@@ -1,0 +1,358 @@
+/* where old reset used to be */
+
+@font-face {
+    font-family: champagne;
+    src: url("../fonts/champagne_limousines/Champagne & Limousines.ttf");
+}
+
+
+@font-face {
+    font-family: champagne_bold;
+    src: url("../fonts/champagne_limousines/Champagne & Limousines Bold.ttf");
+}
+
+.center {
+    margin: auto;
+}
+
+.content {
+    height: 100vh;
+    margin: auto auto;
+    width: 100vw;
+    background: #000000;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.clear {
+    clear: both;
+}
+
+
+/* stackoverflow linked to http://nicolasgallagher.com/micro-clearfix-hack/ */
+
+/* tell the container's children to float left: */
+
+.float-my-children>* {
+    float: left;
+    margin-top: 20%;
+    margin-right: 0px;
+}
+
+.clearfix {
+    *zoom: 1/* for IE */
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.float_custom>* {
+    float: left;
+}
+
+/* my mind's telling me noooo but my */
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+
+/* h1 - h3 */
+
+h1 {
+    font-family: "Roboto Mono";
+    font-weight: normal;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+h1 a {
+    color: #fff;
+    font-family: "Roboto Mono";
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+h1 a:hover {
+    opacity: 1;
+}
+
+h2 {
+    font-family: "Arvo";
+    font-weight: normal;
+    font-size: 40px;
+    text-align: center;
+    color: #313128;
+    margin: auto;
+    padding: 0;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+h3 {
+    /* font-family: "champagne_bold"; */
+    font-family: "Arvo";
+    font-weight: normal;
+    font-size: 26px;
+    letter-spacing: 3px;
+    text-align: left;
+    /*margin: 5px 0;*/
+    padding: 0 0;
+    position: relative;
+}
+
+
+p {}
+
+
+/* id nav */
+
+#nav {
+    height: 100%;
+    width: 67%;
+    float: left;
+    margin-right: 0px;
+}
+
+ul {
+    text-decoration: none;
+}
+
+li {
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+li:hover {
+    opacity: 1;
+}
+
+#songqueue ul {
+    text-decoration: none;
+    opacity: 1;
+}
+
+#songqueue li {
+    opacity: 1;
+    text-decoration: none;
+}
+
+#songqueue li:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+
+#mobile_nav {
+    width: 65vw;
+    float: right;
+    margin-right: 0px;
+}
+
+#mobile_nav ul {
+    list-style: none;
+    float: right;
+}
+
+#mobile_nav li {
+    margin-top: 20px;
+    list-style: none;
+    margin-right: 5%;
+    float: right;
+}
+
+#mobile_nav li a {
+    color: #fff;
+    opacity: 0.6;
+    font-size: 15px;
+    text-decoration: none;
+    font-family: 'Wellfleet';
+    position: relative;
+}
+
+#mobile_nav li a:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+
+
+/* projects or something like that */
+
+#login-screen {
+    padding: 20vh 0 0 0;
+}
+
+#clickable-div div {
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+#clickable-div div:hover {
+    opacity: 1;
+}
+
+ul.a {
+    list-style-type: circle;
+}
+
+#albumart {
+    width: 20vh;
+    height: 20vh;
+}
+
+#progress-status {
+    width: 50%;
+    background-color: #ddd;
+}
+
+#progressbar {
+    width: 1%;
+    height: 15px;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 15px;
+}
+
+#current {
+    align-items: center;
+    align-content: center;
+    margin: auto auto;
+    text-align: left;
+    font-family: "Roboto Mono";
+    font-weight: normal;
+    font-size: 15px;
+    color: #fff;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#songs {
+    margin: auto auto;
+    text-align: left;
+    font-family: "Roboto Mono";
+    font-weight: normal;
+    font-size: 15px;
+    color: #fff;
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+}
+
+#devices {
+    margin: auto auto;
+    text-align: left;
+    font-family: "Roboto Mono";
+    font-weight: normal;
+    font-size: 15px;
+    color: #fff;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+}
+
+#queue {
+    width: 50vw;
+}
+
+#hidden-songqueue-ul {
+    height: 0;
+}
+
+#currentdeviceid {
+    height: 0;
+}
+
+#search {
+    width: 50vw;
+}
+
+#current-device-display {
+    width: 40vw;
+    text-align: right;
+    padding: 0 10vw 0 0;
+}
+
+#available-device-display {
+    width: 60vw;
+}
+
+/* Pure CSS SCroll Animation Arrow */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100%;
+}
+
+.chevron {
+    position: absolute;
+    width: 2.1rem;
+    height: 0.48rem;
+    opacity: 0;
+    transform: scale(0.3);
+    animation: move-chevron 3s ease-out infinite;
+}
+
+.chevron:first-child {
+    animation: move-chevron 3s ease-out 1s infinite;
+}
+
+.chevron:nth-child(2) {
+    animation: move-chevron 3s ease-out 2s infinite;
+}
+
+.chevron:before,
+.chevron:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background: #fff;
+}
+
+.chevron:before {
+    left: 0;
+    transform: skewY(30deg);
+}
+
+.chevron:after {
+    right: 0;
+    width: 50%;
+    transform: skewY(-30deg);
+}
+
+@keyframes move-chevron {
+    25% {
+        opacity: 1;
+    }
+    33.3% {
+        opacity: 1;
+        transform: translateY(2.28rem);
+    }
+    66.6% {
+        opacity: 1;
+        transform: translateY(3.12rem);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(4.8rem) scale(0.5);
+    }
+}
