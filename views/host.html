@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+{% block content %}
+    {% if !user %}
+        <div id="login-screen">
+            <center>
+                <h1>Login if you're brave</h1>
+            </center>
+            <br><br>
+            <center>
+                <h1>
+                    <a href="/auth/spotify">login</a>
+                </h1>
+            </center>
+        </div>
+    {% else %}
+        <script src="/js/bundle-host.js"></script>
+        <script> var accessToken = "{{ accessToken }}" </script>
+        <h1>
+            <div id=roomcodecopy></div>
+        </h1>
+        <h1>
+            <div id="clickable-div">
+                <div id=clearqueue> Clear Queue </div>
+            </div>
+        </h1>
+        <div id="current">
+            <img id="albumart"></img>
+            <div id="currentlyplaying"></div>
+            <div id="progress-status">
+                <div id="progressbar">
+                </div>
+            </div>
+            <div id="playercontrols">
+                <div id="clickable-div">
+                    <div id="play"> play </div>
+                </div>
+                <div id="clickable-div">
+                    <div id="skip"> skip </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="songs">
+            <div id="queue">
+                <div id="clickable-div">
+                    <div id=refreshqueue> Refresh Queue </div>
+                </div>
+                <div id=songqueue>
+                    <ul id=songqueue-ul>
+                    </ul>
+                </div>
+            </div>
+            <div id="search">
+                <div id="searchbar">
+                    search: <input type="text" id="searchbar-text">
+                </div>
+                <div id="searchresults">
+                    <ul id="searchresults-ul">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="devices">
+            <div id="current-device-display"> 
+                Playing on<div id=currentdevice></div>
+                <div id=currentdeviceid></div>
+            </div>
+            <div id="available-device-display">
+                <div id="clickable-div">
+                    <div id="findavailabledevices"> Find Available Devices </div>
+                </div>
+                <div id="available">
+                    <ul id="available-ul">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id=roomcode></div><br>
+    {% endif %}
+{% endblock %}

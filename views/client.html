@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <script src="/js/bundle-client.js"></script>
+    <script> var accessToken = "{{ accessToken }}" </script>
+    <div id="current">
+        <img id="albumart"></img>
+        <div id="currentlyplaying"></div>
+    </div>
+
+    <div id="songs">
+        <div id="queue">
+            <div id="clickable-div">
+                <div id=refreshqueue> Refresh Queue </div>
+            </div>
+            <div id=songqueue>
+                <ul id=songqueue-ul>
+                </ul>
+            </div>
+        </div>
+        <div id="search">
+            <div id="searchbar">
+                search: <input type="text" id="searchbar-text">
+            </div>
+            <div id="searchresults">
+                <ul id="searchresults-ul">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id=roomcode></div>
+{% endblock %}

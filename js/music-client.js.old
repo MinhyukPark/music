@@ -1,0 +1,110 @@
+$(document).ready(function() {
+    var MongoClient = require('mongodb').MongoClient;
+    function updatePage() {
+        var data = fetchFromAPI();
+        document.getElementById("albumart").src = data["albumart"]
+        document.getElementById("currentlyplaying").innerHTML = data["currentlyplaying"]
+        refreshQueue();
+    }
+    setInterval(updatePage, 3000);
+
+	function searchTracks() {
+		var searchQuery = document.getElementById("searchbar-text").value;
+		spotifyApi.searchTracks(searchQuery)
+		  .then(function(data) {
+		    var result = data["tracks"]["items"];
+		    $('#searchresults-ul').empty();
+		    var ul = document.getElementById("searchresults-ul");
+		    for (item of result) {
+			    var li = document.createElement("li");
+			    li.setAttribute('id', item["id"]);
+			    li.appendChild(document.createTextNode(item["name"] + " by " + item["artists"][0]["name"] + " from " + item["album"]["name"]));
+			    ul.appendChild(li);
+                $("#" + item["id"]).click({item: item}, addToQueue);
+		    }
+		  }, function(err) {
+		    console.error(err);
+		});
+	}
+
+	async function fetchFromAPI() {
+        var roomcode = document.getElementById();
+        const db = await MongoClient.connect("mongodb://localhost:27017/music");
+        var data = db.collection("rooms").find({"roomcode": roomcode}).toArray();
+        db.close();
+        return  data;
+	}
+
+	async function pushToAPI(data) {
+        var roomcode = document.getElementById();
+        const db = await MongoClient.connect("mongodb://localhost:27017/music");
+        db.collection("rooms").update({"roomcode": roomcode}, {"data": data});
+        db.close();
+	}
+
+	function addToQueue(event) {
+        refreshQueue();
+        var data = fetchFromAPI();
+	    var item = event.data.item;
+
+	    var ul = document.getElementById("hidden-songqueue-ul");
+	    var li = document.createElement("li");
+	    li.setAttribute('id', item["id"] + "queue");
+	    li.appendChild(document.createTextNode(item["name"] + item["uri"]));
+	    ul.appendChild(li);
+
+	    var ul = document.getElementById("songqueue-ul");
+	    var li = document.createElement("li");
+	    li.setAttribute('id', item["id"] + "visiblequeue");
+	    li.appendChild(document.createTextNode(item["name"] + " by " + item["artists"][0]["name"] + " from " + item["album"]["name"]));
+	    ul.appendChild(li);
+        
+        var currently_added = {}
+        currently_added["hidden"] = item["name"] + item["uri"];
+        currently_added["visible"] = item["name"] + " by " + item["artists"][0]["name"] + " from " + item["album"]["name"];
+	    data["queue"].push(currently_added);
+
+	    pushToAPI(data);
+	}
+
+    function refreshQueue() {
+        var data = fetchFromAPI();
+        $('#hidden-songqueue-ul').empty();	
+        $('#songqueue-ul').empty();	
+        var ul = document.getElementById("hidden-songqueue-ul");
+        var visible_ul = document.getElementById("songqueue-ul");
+	    for (var key in data["queue"]) {
+            if(remoteText.hasOwnProperty(key)) {
+                var li = document.createElement("li");
+                li.setAttribute('id', key);
+                li.appendChild(document.createTextNode(data[key]["hidden"]));
+                ul.appendChild(li);
+                var cur_id = '' + key.split("queue")[0];
+                var cur_name = '' + data["queue"]["hidden"].split("spotify:")[0]
+                var cur_uri = 'spotify:' + data["queue"]["hidden"].split("spotify:")[1]
+                $("#" + key).click({item: {"id": cur_id, "name": cur_name, "uri": cur_uri}}, selectDevice);
+
+                var li = document.createElement("li");
+                li.setAttribute('id', key);
+                li.appendChild(document.createTextNode(data["queue"]["visible"]));
+                visible_ul.appendChild(li);
+                $("#" + key + "visiblequeue").click({item: {"id": cur_id, "name": cur_name, "uri": cur_uri}}, selectDevice);
+            }
+        }
+
+        var currentdevice = document.getElementById("currentdevice");
+        currentdevice.innerHTML = data["currentdevice"];
+        var currentdeviceid = document.getElementById("currentdeviceid");
+        currentdeviceid.innerHTML = remoteText["currentdeviceid"];
+        var currently_playing = document.getElementById("currentlyplaying");
+        currently_playing.innerHTML = remoteText["currentlyplaying"];
+	}
+
+	var initLoad = true;
+	if(initLoad) {
+        checkEnd();
+	    initLoad = false;
+	}
+
+    $("#searchbar-text").on("change", searchTracks);
+});

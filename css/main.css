@@ -196,6 +196,10 @@ li:hover {
     padding: 20vh 0 0 0;
 }
 
+#clickable-div {
+    padding: 0 20px;
+}
+
 #clickable-div div {
     text-decoration: none;
     opacity: 0.6;
@@ -227,6 +231,10 @@ ul.a {
     line-height: 15px;
 }
 
+#hostorclient {
+    padding: 20vh 0 0 0;
+}
+
 #current {
     align-items: center;
     align-content: center;
@@ -239,6 +247,11 @@ ul.a {
     height: 30vh;
     display: flex;
     flex-direction: column;
+}
+
+#playercontrols {
+    display: flex;
+    flex-direction: row;
 }
 
 #songs {

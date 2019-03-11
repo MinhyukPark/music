@@ -1,5 +1,5 @@
 global.XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-require('dotenv').config({path: '/home/min/git_repos/music_test/.env'});
+require('dotenv').config({path: '/home/min/git_repos/music/.env'});
 var Spotify = require('spotify-web-api-js'); 
 var express = require('express');
 var  session = require('express-session');
@@ -24,11 +24,11 @@ passport.use(
     {
       clientID: appKey,
       clientSecret: appSecret,
-      callbackURL: 'https://music.minhyukpark.com/callback'
+      callbackURL: 'https://musictude.minhyukpark.com/callback'
     },
     function(accessToken, refreshToken, expires_in, profile, done) {
       process.nextTick(function() {
-	accessToken_g = accessToken;
+	    accessToken_g = accessToken;
         return done(null, profile);
       });
     }
@@ -49,6 +49,12 @@ app.engine('html', consolidate.swig);
 app.get('/', function(req, res) {
   res.render('index.html', { user: req.user , accessToken: accessToken_g });
 });
+app.get('/host', function(req, res) {
+  res.render('host.html', { user: req.user , accessToken: accessToken_g });
+});
+app.get('/client', function(req, res) {
+  res.render('client.html', {accessToken: accessToken_g});
+});
 app.get('/account', ensureAuthenticated, function(req, res) {
   res.render('account.html', { user: req.user });
 });
@@ -66,7 +72,7 @@ app.get(
   '/callback',
   passport.authenticate('spotify', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/host');
   }
 );
 app.get('/logout', function(req, res) {
