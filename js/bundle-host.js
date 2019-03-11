@@ -27,7 +27,7 @@ $(document).ready(function() {
     */
     var roomcode = makeid();
     document.getElementById("roomcode").innerHTML = roomcode;
-    document.getElementById("roomcodecopy").innerHTML = "Link: music.minhyukpark.com?roomcode=" + roomcode;
+    document.getElementById("roomcodecopy").innerHTML = "Link: musictude.minhyukpark.com?roomcode=" + roomcode;
     initRoom();
     function initRoom() {
         spotifyApi.getMyCurrentPlayingTrack().then(function(data) {
