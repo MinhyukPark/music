@@ -47,7 +47,8 @@ app.use(express.static(__dirname + '/public'));
 app.engine('html', consolidate.swig);
 
 app.get('/', function(req, res) {
-  res.render('index.html', { user: req.user , accessToken: accessToken_g });
+  req.logout();
+  res.render('index.html');
 });
 app.get('/host', function(req, res) {
   res.render('host.html', { user: req.user , accessToken: accessToken_g });
@@ -55,9 +56,7 @@ app.get('/host', function(req, res) {
 app.get('/client', function(req, res) {
   res.render('client.html', {accessToken: accessToken_g});
 });
-app.get('/account', ensureAuthenticated, function(req, res) {
-  res.render('account.html', { user: req.user });
-});
+
 app.get('/login', function(req, res) {
   res.render('login.html', { user: req.user });
 });
@@ -82,9 +81,3 @@ app.get('/logout', function(req, res) {
 app.listen(8769);
 
 /* auth check */
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
