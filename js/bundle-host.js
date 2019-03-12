@@ -205,7 +205,7 @@ $(document).ready(function() {
 	    xmlHttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 	    xmlHttp.send(JSON.stringify(data));
         updatePage();
-        setInterval(checkEnd, 10000);
+        setInterval(checkEnd, 5000);
         setInterval(refreshQueue, 1000);
 	}
 
@@ -245,7 +245,6 @@ $(document).ready(function() {
         }
     }
 
-    $("#refreshqueue").click(refreshQueue);
     $("#clearqueue").click(clearQueue);
     $("#searchbar-text").on("change", searchTracks);
     $("#findavailabledevices").click(findAvailableDevices);

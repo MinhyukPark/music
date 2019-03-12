@@ -6,7 +6,7 @@ $(document).ready(function() {
 	spotifyApi.setAccessToken(accessToken);
     document.getElementById("roomcode").innerHTML = window.location.hash.substring(1);
     updatePage();
-    setInterval(updatePage, 10000);
+    setInterval(updatePage, 5000);
     setInterval(refreshQueue, 1000);
     function updatePage() {
         var data = fetchFromAPI()[0];
@@ -83,7 +83,6 @@ $(document).ready(function() {
         }
     }
 
-    $("#refreshqueue").click(refreshQueue);
     $("#searchbar-text").on("change", searchTracks);
 });
 

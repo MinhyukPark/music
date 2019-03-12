@@ -196,8 +196,26 @@ li:hover {
     padding: 20vh 0 0 0;
 }
 
+#clickablefindavailabledevice-div {
+    padding: 0 20px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#clickablefindavailabledevice-div div {
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+#clickablefindavailabledevice-div div:hover {
+    opacity: 1;
+}
+
 #clickable-div {
     padding: 0 20px;
+    margin: auto auto;
+    width: fit-content;
+    height: fit-content;
 }
 
 #clickable-div div {
@@ -279,7 +297,8 @@ ul.a {
 }
 
 #queue {
-    width: 50vw;
+    width: 45vw;
+    padding: 0 0 0 5vw;
 }
 
 #hidden-songqueue-ul {
@@ -292,6 +311,8 @@ ul.a {
 
 #search {
     width: 50vw;
+    overflow: hidden;
+    height: 90%;
 }
 
 #current-device-display {
