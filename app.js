@@ -8,7 +8,6 @@ var  swig = require('swig');
 var  SpotifyStrategy = require('passport-spotify').Strategy;
 var consolidate = require('consolidate');
 
-var accessToken_g = null;
 var appKey = process.env.APPKEY;
 var appSecret = process.env.APPSECRET;
 
@@ -28,7 +27,10 @@ passport.use(
     },
     function(accessToken, refreshToken, expires_in, profile, done) {
       process.nextTick(function() {
-	    accessToken_g = accessToken;
+        profile["accessToken"] = accessToken;
+        profile["refreshToken"] = refreshToken;
+        profile["appKey"] = appKey;
+        profile["appSecret"] = appSecret;
         return done(null, profile);
       });
     }
@@ -47,26 +49,32 @@ app.use(express.static(__dirname + '/public'));
 app.engine('html', consolidate.swig);
 
 app.get('/', function(req, res) {
-  req.logout();
   res.render('index.html');
 });
 app.get('/host', function(req, res) {
-  res.render('host.html', { user: req.user , accessToken: accessToken_g });
+  res.render('host.html', { user: req.user });
 });
 app.get('/client', function(req, res) {
-  res.render('client.html', {accessToken: accessToken_g});
+  res.render('client.html', {});
 });
 
 app.get('/login', function(req, res) {
   res.render('login.html', { user: req.user });
 });
+
+app.get('/auth/spotify', function(req, res) {
+  req.logout();
+  res.redirect('/auth/spotify/internal');
+});
+
 app.get(
-  '/auth/spotify',
+  '/auth/spotify/internal',
   passport.authenticate('spotify', {
     scope: ['user-read-email', 'user-read-private', 'app-remote-control', 'user-read-playback-state', 'user-modify-playback-state'],
     showDialog: true
   }), function(req, res) { }
 );
+
 app.get(
   '/callback',
   passport.authenticate('spotify', { failureRedirect: '/login' }),

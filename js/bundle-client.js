@@ -3,14 +3,19 @@ $(document).ready(function() {
 	var Spotify = require('spotify-web-api-js');
     var mongoose = require('mongoose');
 	var spotifyApi = new Spotify();
-	spotifyApi.setAccessToken(accessToken);
     document.getElementById("roomcode").innerHTML = window.location.hash.substring(1);
     updatePage();
-    setInterval(updatePage, 5000);
-    setInterval(refreshQueue, 1000);
+    setInterval(updatePage, 3000);
+    // setInterval(refreshQueue, 3000);
+
+    function updateToken(data) {
+        spotifyApi.setAccessToken(data["accessToken"]);
+    }
+
     function updatePage() {
         var data = fetchFromAPI()[0];
         refreshQueue();
+        updateToken(data)
         document.getElementById("albumart").src = data["albumart"];
         document.getElementById("currentlyplaying").innerHTML = data["currentlyplaying"];
     }

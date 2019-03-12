@@ -14,7 +14,10 @@
         </div>
     {% else %}
         <script src="/js/bundle-host.js"></script>
-        <script> var accessToken = "{{ accessToken }}" </script>
+        <script> var accessToken = "{{ user.accessToken }}" </script>
+        <script> var refreshToken = "{{ user.refreshToken }}" </script>
+        <script> var appKey = "{{ user.appKey }}" </script>
+        <script> var appSecret = "{{ user.appSecret }}" </script>
         <h1>
             <div id=roomcodecopy></div>
         </h1>

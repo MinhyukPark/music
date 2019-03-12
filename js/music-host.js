@@ -1,8 +1,18 @@
 $(document).ready(function() {
+    var querystring = require('query-string');
 	var Spotify = require('spotify-web-api-js');
     var mongoose = require('mongoose');
 	var spotifyApi = new Spotify();
 	spotifyApi.setAccessToken(accessToken);
+
+    /* setInterval(updateAccessToken, 10000);
+    function updateAccessToken() {
+        var data = fetchFromAPI();
+        data["accessToken"] = getNewAPIToken();;
+	    spotifyApi.setAccessToken(data["accessToken"]);
+        pushToAPI(data);
+    }*/
+
     function makeid() {
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -47,7 +57,8 @@ $(document).ready(function() {
                 "currentlyplaying": undefined,
                 "albumart": '' + "",
                 "currentdeviceid": "",
-                "currentdevice": ""
+                "currentdevice": "",
+                "accessToken": accessToken
             }
             addNewToAPI(new_room);
         });
@@ -177,6 +188,17 @@ $(document).ready(function() {
 	}
 
     // MARK: API_MARK
+    /*
+    function getNewAPIToken() {
+	    var xmlHttp = new XMLHttpRequest();
+	    var url = "/token/refresh";
+	    xmlHttp.open( "GET", url, false );
+	    xmlHttp.send( null );
+	    var data = JSON.parse(xmlHttp.responseText);
+        console.log(data);
+	    return data;
+    }*/
+
 	function fetchFromAPI() {
 	    var xmlHttp = new XMLHttpRequest();
 	    var url = "https://api.minhyukpark.com/music";
@@ -205,7 +227,7 @@ $(document).ready(function() {
 	    xmlHttp.send(JSON.stringify(data));
         updatePage();
         setInterval(checkEnd, 5000);
-        setInterval(refreshQueue, 1000);
+        setInterval(refreshQueue, 3000);
 	}
 
     function addToQueue(event) {
