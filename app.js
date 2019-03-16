@@ -49,8 +49,10 @@ app.use(express.static(__dirname + '/public'));
 app.engine('html', consolidate.swig);
 
 app.get('/', function(req, res) {
+  req.logout();
   res.render('index.html');
 });
+
 app.get('/host', function(req, res) {
   res.render('host.html', { user: req.user });
 });
@@ -58,12 +60,13 @@ app.get('/client', function(req, res) {
   res.render('client.html', {});
 });
 
+/*
 app.get('/login', function(req, res) {
   res.render('login.html', { user: req.user });
 });
+*/
 
 app.get('/auth/spotify', function(req, res) {
-  req.logout();
   res.redirect('/auth/spotify/internal');
 });
 
