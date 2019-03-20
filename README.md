@@ -6,7 +6,7 @@ built with :heartpulse:
 
 :lock: Signed using GPG
 
-[Music.MinhyukPark.com](https://music.minhyukpark.com "Music!")
+[Musictude.MinhyukPark.com](https://musictude.minhyukpark.com "Music!")
 
 ## What is this
 Ever wanted to throw a party with your friends and queue up music from the same place?
